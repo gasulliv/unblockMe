@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --storify-text-color-main: #000000;
+    --storify-light-gray: #2a2a2a;
+    --storify-dark-gray:#111111;
+    --storify-light-teal:#bdece3;
+    --storify-mid-teal:#95e1d3;
+    --storify-dark-teal:#6dd6c2;
+  }
