@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -27,69 +28,53 @@ function Login({ setToken }) {
 
   return (
     <>
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Create an account
-        </h2>
-    </div>
-
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form 
-      class="space-y-6" 
-      action="#" 
-      method="POST"
-      onSubmit={handleSubmit}>
-        <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-            <div class="mt-2">
-            <input 
-              onChange={(e) => setUsername(e.target.value)} 
-              id="email" name="email" 
-              type="email" 
-              autocomplete="email" 
-              required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              />
-        </div>
-    </div>
-
-    <div>
-      <div class="flex items-center justify-between">
-        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-        <div class="text-sm">
-          <Link 
-          href="#" 
-          to="/forgot-password" 
-          class="font-semibold text-indigo-600 hover:text-indigo-500">
-            Forgot password?
-          </Link>
-        </div>
-      </div>
-
-      <div class="mt-2">
-        <input 
-            onChange={(e) => setUsername(e.target.value)} 
-            id="password" 
-            name="password" 
+     <div className="unblock-me--main-container grid content-center">
+      <div className="unblock-me--container">
+        <h1 className="text-center text-2xl">Welcome Back!</h1>
+          <form 
+          onSubmit={handleSubmit}
+          className="flex max-w-md flex-col gap-4 mx-auto">
+            <div>
+              <div className="mb-2 block">
+                <Label 
+                htmlFor="email2" 
+                value="Your email" />
+              </div>
+              <TextInput 
+                id="email2" 
+                type="email" 
+                onChange={(e) => setUsername(e.target.value)}  
+                placeholder="name@flowbite.com" 
+                required 
+                shadow />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label 
+                htmlFor="password2" 
+                value="Your password" />
+              </div>
+            <TextInput 
+            id="password2" 
             type="password" 
-            autocomplete="current-password" 
+            onChange={(e) => setPassword(e.target.value)} 
             required 
-            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-        />
-      </div>
+            shadow />
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox id="agree" />
+              <Label htmlFor="agree" className="flex">
+                I agree with the&nbsp;
+                <Link href="#" className="text-cyan-600 hover:underline dark:text-cyan-500 unblock-me--link">
+                  terms and conditions
+                </Link>
+              </Label>
+            </div>
+      <Button className="unblock-me--button" type="submit">Register new account</Button>
+    </form>
+    </div>
     </div>
 
-    <div>
-      <button 
-        type="submit" 
-        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-        Sign in
-      </button>
-    </div>
-    </form>
-  </div>
-</div>
     </>
   )
 }

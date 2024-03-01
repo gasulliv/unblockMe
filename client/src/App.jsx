@@ -13,7 +13,7 @@ function App() {
   
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <NavBarSignedIn /> */}
       <Routes>
         <Route path="*" element={<PageMissing />}></Route>
