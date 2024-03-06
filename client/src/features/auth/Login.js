@@ -29,7 +29,7 @@ const Login = () => {
         userRef.current.focus();
     }, [ user, pswrd ]); 
 
-   const handleSubmit = aysnc (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -37,7 +37,7 @@ const Login = () => {
         const userData = await login({ user, pswrd }).unwrap();
         dispatch(setCredentials({ ...userData, user }))
         setUser('')
-        setPwd('')
+        setPswrd('')
         navigate('/dashboard')
     } catch (err) {
         if (!err?.response) {
@@ -68,7 +68,7 @@ const Login = () => {
             <input 
                 type="text"
                 id="username"
-                ref={ username }
+                ref={ user }
                 value= { user }
                 onChange={ handleUserInput }
                 required>
@@ -79,7 +79,7 @@ const Login = () => {
             <input 
                 type="text"
                 id="password"
-                ref={ password }
+                ref={ pswrd }
                 value= { pswrd }
                 onChange={ handlePswrdInput }
                 required>
