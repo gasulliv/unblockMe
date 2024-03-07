@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import '../../components/public.css'
 import { FloatingLabel, Button } from 'flowbite-react'
 
-//requires that usernames start with either upper or lower case letters and followed by 3 to 23 characters either lowercase, uppercase or numbers 0 to 9
-const USER_REGEX = /^[ a-zA-z ][ a-zA-Z0-9-_ ]{ 3,23 }$/;
-//requires at least one lowercase, one uppercase, one number and one special character and can be between 8-24 characters long
-const PSWRD_REGEX = /^(?=.*[ a-z ])(?=.*[ A-Z ])(?=.*[ 0-9 ])(?=.*[ !@#$% ]).{ 8,24 }$/;
+//requires that usernames start with either upper or lower case letters and followed by 3 to 10 characters either lowercase, uppercase or numbers 0 to 9
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,}$/g;
+//requires at least one lowercase, one uppercase, one number and one special character must be at least 8 characters long
+const PSWRD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*?\d)(?=.*[0-9])(?=.*[!@#$%]).{8,}$/g;
 
 const SignUp = () => {
 
@@ -41,9 +41,11 @@ const SignUp = () => {
     useEffect(() => {
         //validates username
         //console log results
-        const result = USER_REGEX.test( user );
-        setValidName( result );
-        console.log(result)
+        const result = USER_REGEX.test(user);
+        console.log(USER_REGEX)
+        console.log(user)
+        setValidName(result);
+        console.log(result);
         //add user state to dependency array, so any time it changes, it will be validated
     }, [ user ]); 
 
@@ -97,6 +99,7 @@ const SignUp = () => {
                     label="Username"
                     type="text"
                     id="username"
+                    //allows us to set focus for ada
                     ref={ userRef }
                     autoComplete="off"
                     onChange={ handleUserInput }
@@ -121,6 +124,7 @@ const SignUp = () => {
                     autoComplete="off"
                     onChange={ handlePswrdInput }
                     aria-invalid = { validPswrd ? "false" : "true" }
+                    aria-describedby="userNote"
                     onFocus={ () => setUserFocus(true) }
                     onBlur = { () => setUserFocus(false) }
                     className="mb-4"
