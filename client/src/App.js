@@ -4,6 +4,7 @@ import Public from './components/Public';
 import Login from './features/auth/Login';
 import Dashboard from './features/auth/Dashboard';
 import RequireAuth from './features/auth/RequireAuth';
+import SignUp from './features/auth/SignUp';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={ <Layout/> }></Route>
         { /*public routes*/ }
         <Route index element = { <Public/> }></Route>
+        <Route path="sign-up" element = { <SignUp/> }></Route>
         <Route path="login" element = { <Login/> }></Route>
 
         { /*private routes */ }

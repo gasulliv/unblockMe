@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice"; 
 
+import '../../components/public.css'
+import { FloatingLabel, Button, Flowbite } from 'flowbite-react'
 
 const Login = () => {
     //set focus on form at correct time
@@ -61,36 +63,53 @@ const Login = () => {
 
    const handleUserInput = (e) => setUser(e.target.value)
    const handlePswrdInput = (e) => setPswrd(e.target.value)
+  
 
    const content = isLoading? <h1>Loading...</h1> : (
     <section className="unblockMe--login">
         {/* error is displayed at top */}
-        <p ref={ errRef } className= { errMsg ? "errmsg" : "offscreen" }></p>
-        <h1>Welcome Back!</h1>
-        <form onSubmit= { handleSubmit }>
-            <label htmlFor="username">
-                Username:
-            </label>
-            <input 
+        <h3 className="text-center text-2xl">
+            unblock<span className="font-semibold">Me</span>
+        </h3>
+        <h1 id='unblockMe--public-title' className="unblockMe--public-title text-center">
+            <span className='unblockMe--public-title unblockMe--public-title-word-1'>
+                Log
+            </span>
+            <span className='unblockMe--public-title unblockMe--public-title-word-2'>
+                &nbsp;in
+            </span>
+        </h1>
+        <p ref={ errRef } className= { errMsg ? "appear" : "offscreen" }></p>
+        <form className="unblockMe--form" onSubmit= { handleSubmit }>
+            <FloatingLabel 
+                htmlFor="username" 
+                variant="standard" 
+                label="Username"
                 type="text"
                 id="username"
                 ref={ userRef }
                 value= { user }
+                autoComplete="off"
                 onChange={ handleUserInput }
+                className="mb-4"
                 required>
-            </input>
-            <label htmlFor="password">
-                Password:
-            </label>
-            <input 
+            </FloatingLabel>
+            <FloatingLabel 
+                htmlFor="password" 
+                variant="standard" 
+                label="Password"
                 type="text"
                 id="password"
                 ref={ pswrdRef }
                 value= { pswrd }
+                autoComplete="off"
                 onChange={ handlePswrdInput }
+                className="mb-4"
                 required>
-            </input>
-            <button type="submit">Login</button>
+            </FloatingLabel>
+            <Button size="xl" className="w-full" type="submit" color="dark">
+                Login
+            </Button>
         </form>
     </section>
    )

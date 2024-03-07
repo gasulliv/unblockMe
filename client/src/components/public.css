@@ -1,0 +1,74 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255 251 235 / 1);
+  }
+
+.unblockMe--public-title {
+    animation: color-animation 4s linear infinite;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 6.5vw;
+  }
+  
+  .unblockMe--public-title-word-1 {
+    --color-1: #DF8453;
+    --color-2: #3D8DAE;
+    --color-3: #E4A9A8;
+  }
+  
+  .unblockMe--public-title-word-2 {
+    --color-1: #DBAD4A;
+    --color-2: #ACCFCB;
+    --color-3: #17494D;
+  }
+  
+  .unblockMe--public-title-word-3 {
+    --color-1: #ACCFCB;
+    --color-2: #E4A9A8;
+    --color-3: #ACCFCB;
+  }
+
+  /*form*/
+
+  form.unblockMe--form {
+    max-width: 350px;
+    width: 350px;
+    margin: 0 auto;
+  }
+
+  #userNote,
+  #pswrdNote,
+  #noMatchNote {
+    font-size:0.5em;
+    z-index: 100;
+    position: relative;
+    max-height: 50px;
+  }
+
+  .offscreen {
+    left: 300rem;
+  }
+
+  .appear {
+    left:0;
+  }
+  
+  @keyframes color-animation {
+    0%    {color: var(--color-1)}
+    32%   {color: var(--color-1)}
+    33%   {color: var(--color-2)}
+    65%   {color: var(--color-2)}
+    66%   {color: var(--color-3)}
+    99%   {color: var(--color-3)}
+    100%  {color: var(--color-1)}
+  }
+
+  @media (width <= 600px) {
+    .unblockMe--public-title {
+      font-size: 9.5vw; 
+    }  
+  }
