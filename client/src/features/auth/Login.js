@@ -15,7 +15,9 @@ const Login = () => {
     const errRef = useRef();
     //states for user, password and error message
     const [ user, setUser ] = useState('');
+    const [ userFocus, setUserFocus ] = useState(false);
     const [ pswrd, setPswrd ] = useState('');
+    const [ pswrdFocus, setPswrdFocus ] = useState(false);
     const [ errMsg, setErrMsg ] = useState('');
     //navigate function to navigate to dashboard on successful login
     const navigate = useNavigate();
@@ -32,6 +34,10 @@ const Login = () => {
         //sets focus to username input
         userRef.current.focus();
     }, [ user, pswrd ]); 
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [ user, pswrd]);
 
    const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,10 +96,14 @@ const Login = () => {
                 ref={ userRef }
                 value= { user }
                 autoComplete="off"
+                aria-describedby="userlogin"
                 onChange={ handleUserInput }
                 className="mb-4"
                 required>
             </FloatingLabel>
+            <p id="userlogin" className={ userFocus? "appear" : "offscreen" }>
+                Please enter a username
+            </p>
             <FloatingLabel 
                 htmlFor="password" 
                 variant="standard" 
@@ -103,10 +113,14 @@ const Login = () => {
                 ref={ pswrdRef }
                 value= { pswrd }
                 autoComplete="off"
+                aria-describedby="userPswrd"
                 onChange={ handlePswrdInput }
                 className="mb-4"
                 required>
             </FloatingLabel>
+            <p id="userlogin" className={ pswrdFocus ? "appear" : "offscreen" }>
+                Enter a password
+            </p>
             <Button size="xl" className="w-full" type="submit" color="dark">
                 Login
             </Button>

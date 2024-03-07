@@ -5,7 +5,7 @@ import '../../components/public.css'
 import { FloatingLabel, Button } from 'flowbite-react'
 
 //requires that usernames start with either upper or lower case letters and followed by 3 to 10 characters either lowercase, uppercase or numbers 0 to 9
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,}$/g;
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,24}$/g;
 //requires at least one lowercase, one uppercase, one number and one special character must be at least 8 characters long
 const PSWRD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*?\d)(?=.*[0-9])(?=.*[!@#$%]).{8,}$/g;
 
@@ -14,7 +14,6 @@ const SignUp = () => {
      //set focus on form 
      //for accessibility
      const userRef = useRef();
-     const pswrdRef = useRef();
      const errRef = useRef();  
      
      //set states for username, password, error, success message and match password
@@ -53,11 +52,13 @@ const SignUp = () => {
         //validates password
         //putting password validation and match in the same useEffect allows password match and password validation 
         //to remain in sync!
-        const result = PSWRD_REGEX.test( pswrd );
-        setValidPswrd( result );
+        const result = PSWRD_REGEX.test(pswrd);
+        setValidPswrd(result);
+        console.log(result);
         //return a boolean named match that compares the password to the match password
         const match = pswrd === matchPswrd;
         setValidMatch( match );
+        console.log(match);
         //add user state to dependency array, so any time it changes, it will be validated
     }, [ pswrd, matchPswrd ]); 
 
@@ -68,8 +69,23 @@ const SignUp = () => {
         setErrMsg('');
     }, [ user, pswrd, matchPswrd ]);
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault;
+    //     //prevent hacking
+    //     const checkUser = USER_REGEX.text(user);
+    //     const checkPassword = PSWRD_REGEX.test(user);
+
+    //     if ( !checkUser || !checkPassword ) {
+    //         setErrMsg('Invalid Entry, try again');
+    //         return;
+    //     }
+
+
+    // }
+
     const handleUserInput = (e) => setUser(e.target.value)
     const handlePswrdInput = (e) => setPswrd(e.target.value)
+    const handleMatchInput = (e) => setMatchPswrd(e.target.value)
 
     const content = (
         <section className="unblockMe--login">
@@ -84,7 +100,7 @@ const SignUp = () => {
             <h3 className="text-center text-2xl">
                 unblock<span className="font-semibold">Me</span>
             </h3>
-            <h1 id='unblockMe--public-title' className="unblockMe--public-title text-center">
+            <h1 id='unblockMe--public-title' className="mb-5 unblockMe--public-title text-center">
                 <span className='unblockMe--public-title unblockMe--public-title-word-1'>
                     Get
                 </span>
@@ -120,20 +136,40 @@ const SignUp = () => {
                     label="Password"
                     type="password"
                     id="password"
-                    ref={ pswrdRef }
-                    autoComplete="off"
                     onChange={ handlePswrdInput }
                     aria-invalid = { validPswrd ? "false" : "true" }
-                    aria-describedby="userNote"
-                    onFocus={ () => setUserFocus(true) }
-                    onBlur = { () => setUserFocus(false) }
+                    aria-describedby="pswrdNote"
+                    onFocus={ () => setPswrdFocus(true) }
+                    onBlur = { () => setPswrdFocus(false) }
                     className="mb-4"
                     required>
                 </FloatingLabel>
-                <p id="pswrdNote" className={ userFocus && pswrd && !validPswrd? "appear" : "offscreen" }>
+                <p id="pswrdNote" className={ pswrdFocus && pswrd && !validPswrd? "appear" : "offscreen" }>
                     Enter a password, passwords should start with 
                     an uppercase letter, contain at least one number, one special character,
-                    and be 8 to 24 characters long
+                    and be 8 to 24 characters long. Allowed special characters: 
+                    <span aria-label="exclamation mark"> !</span> 
+                    <span aria-label="hashtag">#</span> 
+                    <span aria-label="at symbol">@</span>
+                    <span aria-label="dollar sign">$</span> 
+                    <span aria-label="percentage symbol">%</span> 
+                </p>
+                <FloatingLabel 
+                    htmlFor="confirm-password" 
+                    variant="standard" 
+                    label="Confirm Password"
+                    type="password"
+                    id="repeatPassword"
+                    onChange={ handleMatchInput }
+                    aria-invalid = { validPswrd ? "false" : "true" }
+                    aria-describedby="matchNote"
+                    onFocus={ () => setMatchFocus(true) }
+                    onBlur = { () => setMatchFocus(false) }
+                    className="mb-4"
+                    required>
+                </FloatingLabel>
+                <p id="matchNote" className={ matchFocus && !validMatch? "appear" : "offscreen" }>
+                    Passwords should match
                 </p>
                 <Button size="xl" className="w-full" type="submit" color="dark">
                     Login
