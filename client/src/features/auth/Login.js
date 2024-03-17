@@ -101,7 +101,7 @@ const Login = () => {
                 className="mb-4"
                 required>
             </FloatingLabel>
-            <p id="userlogin" className={ userFocus? "appear" : "offscreen" }>
+            <p id="userLogin" className={ userFocus? "appear" : "offscreen" }>
                 Please enter a username
             </p>
             <FloatingLabel 
@@ -113,12 +113,12 @@ const Login = () => {
                 ref={ pswrdRef }
                 value= { pswrd }
                 autoComplete="off"
-                aria-describedby="userPswrd"
+                aria-describedby="pswrdLogin"
                 onChange={ handlePswrdInput }
                 className="mb-4"
                 required>
             </FloatingLabel>
-            <p id="userlogin" className={ pswrdFocus ? "appear" : "offscreen" }>
+            <p id="pswrdLogin" className={ pswrdFocus ? "appear" : "offscreen" }>
                 Enter a password
             </p>
             <Button size="xl" className="w-full" type="submit" color="dark">
